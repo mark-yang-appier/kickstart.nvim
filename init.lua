@@ -201,7 +201,7 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
 -- NOTE: [[ My keymap]]
-vim.keymap.set('n', 'gr', 'gT', { noremap = true })
+-- vim.keymap.set('n', 'gr', 'gT', { noremap = true })
 vim.keymap.set('n', 'j', 'gj', { noremap = true })
 vim.keymap.set('n', 'k', 'gk', { noremap = true })
 vim.keymap.set('n', ';', ':', { noremap = true })
@@ -465,6 +465,67 @@ require('lazy').setup({
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
     end,
+  },
+  {
+    'folke/flash.nvim',
+    event = 'VeryLazy',
+    ---@type Flash.Config
+    opts = {},
+    -- stylua: ignore
+    keys = {
+      { 's', mode = { 'n', 'x', 'o' }, function() require('flash').jump({label = { after = { 0, 0 } } }) end, desc = 'Flash' },
+      { 'S', mode = { 'n', 'x', 'o' }, function() require('flash').treesitter() end, desc = 'Flash Treesitter' },
+      { 'r', mode = 'o', function() require('flash').remote() end, desc = 'Remote Flash' },
+      { 'R', mode = { 'o', 'x' }, function() require('flash').treesitter_search() end, desc = 'Treesitter Search' },
+      { '<c-s>', mode = { 'c' }, function() require('flash').toggle() end, desc = 'Toggle Flash Search' },
+      {
+        '<leader>j',
+        mode = { 'n', 'x', 'o' },
+        function()
+          require('flash').jump({
+            search = {
+              mode = 'search',
+              max_length = 0,
+            },
+            label = { after = { 0, 0 } },
+            pattern = '^',
+          })
+        end,
+        desc = 'Flash Line Jump',
+      },
+      {
+        '<leader>k',
+        mode = { 'n', 'x', 'o' },
+        function()
+          require('flash').jump({
+            search = {
+              mode = 'search',
+              max_length = 0,
+            },
+            label = { after = { 0, 0 } },
+            pattern = '^',
+          })
+        end,
+        desc = 'Flash Line Jump',
+      },
+    },
+  },
+  {
+    'smoka7/multicursors.nvim',
+    event = 'VeryLazy',
+    dependencies = {
+      'nvimtools/hydra.nvim',
+    },
+    opts = {},
+    cmd = { 'MCstart', 'MCvisual', 'MCclear', 'MCpattern', 'MCvisualPattern', 'MCunderCursor' },
+    keys = {
+      {
+        mode = { 'v', 'n' },
+        '<Leader>m',
+        '<cmd>MCstart<cr>',
+        desc = 'Create a selection for selected text or word under the cursor',
+      },
+    },
   },
 
   -- LSP Plugins
@@ -900,6 +961,7 @@ require('lazy').setup({
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
       vim.cmd.colorscheme 'tokyonight-night'
+      vim.cmd.colorscheme 'unokai'
     end,
   },
 
