@@ -93,6 +93,10 @@ vim.g.maplocalleader = ' '
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
+-- Disable the default file explorer for nvim tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
@@ -961,7 +965,7 @@ require('lazy').setup({
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
       vim.cmd.colorscheme 'tokyonight-night'
-      vim.cmd.colorscheme 'unokai'
+      -- vim.cmd.colorscheme 'unokai'
     end,
   },
 
@@ -1029,6 +1033,30 @@ require('lazy').setup({
     --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
     --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+  },
+  {
+    'nvim-tree/nvim-tree.lua',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    cmd = { 'NvimTreeToggle', 'NvimTreeFocus', 'NvimTreeFindFile' },
+    keys = {
+      -- { '<leader>e', '<cmd>NvimTreeToggle<CR>', desc = 'Toggle File [E]xplorer' },
+      { '<leader>e', '<cmd>NvimTreeFindFile<CR>', desc = 'File [E]xplorer [F]ind File' },
+    },
+    config = function()
+      require('nvim-tree').setup {
+        sort_by = 'case_sensitive',
+        view = {
+          width = 30,
+          side = 'left',
+        },
+        renderer = {
+          group_empty = true,
+        },
+        filters = {
+          dotfiles = false,
+        },
+      }
+    end,
   },
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
