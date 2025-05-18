@@ -13,8 +13,8 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- Keybinds to make split navigation easier.
 vim.keymap.set('n', '<left>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<right>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<up>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<down>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+vim.keymap.set('n', '<down>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+vim.keymap.set('n', '<up>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 vim.keymap.set('n', ';', ':', { noremap = true })
 vim.keymap.set('n', 'w', 'W', { noremap = true })
@@ -52,4 +52,10 @@ vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true })
 vim.keymap.set('v', 'p', '"_dP', { noremap = true, silent = true })
 
 -- Replace word under cursor
-vim.keymap.set('n', '<leader>w', '*``cgn', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>w', '*``cgn', { noremap = true, silent = true, desc = 'Replace [W]ord under cursor' })
+
+--  Some terminals have colliding keymaps or are not able to send distinct keycodes
+-- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
+-- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
+-- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
+-- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
